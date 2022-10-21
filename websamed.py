@@ -1,5 +1,7 @@
+import pandas as pd
 from bs4 import BeautifulSoup
 import requests
+import csv
 
 # url = 'https://brownstocktrading.com/'
 url = 'https://seekingalpha.com/api/sa/combined/TSLA.xml'
@@ -21,8 +23,20 @@ datesAll = dates[:]
 #     # print('hello')
 #     print(anchor.text)
 
-for title, date in zip(titlesAll, datesAll):
-    print('Title: ' + title.text + ' - Published on: ' + date.text)
+# for title, date in zip(titlesAll, datesAll):
+#     print('Title: ' + title.text + ' - Published on: ' + date.text)
+
+title_date = titlesAll,datesAll
+title_df = pd.DataFrame(title_date)
+titleCSV = pd.DataFrame(titlesAll)
+
+# titleCSV.to_csv('new-titles-01.csv', index=False)
+
+with open('somenewn.csv', 'w') as f:
+    writer = csv.writer(f)
+    writer.writerows(zip(titlesAll, datesAll))
+
+# print(title_df)
 
 
 # print(titles)
